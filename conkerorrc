@@ -1,0 +1,112 @@
+
+require("new-tabs.js");
+
+url_completion_use_history = true;
+url_completion_use_bookmarks = true;
+
+homepage = "about:blank";
+
+// clicks in new buffer
+require("clicks-in-new-buffer.js");
+clicks_in_new_buffer_target = OPEN_NEW_BUFFER_BACKGROUND;
+
+// favicons
+require("favicon");
+add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
+read_buffer_show_icons = true;
+
+/***************************************************
+ * Webjumps
+ ***************************************************/
+define_webjump("trans", "http://translate.google.com/translate_t#auto|ru|%s");
+define_webjump("hackernews", "http://searchyc.com/%s", $alternative = "http://news.ycombinator.com");
+define_webjump("yandex", "http://yandex.ru/yandsearch?text=%s");
+define_webjump("ymail", "mail.yandex.ru");
+define_webjump("dskut", "dskut.ru");
+define_webjump("dmail", "mail.yandex.ru/for/dskut.ru");
+
+webjumps.y = webjumps.yandex;
+/**************************************************/
+
+/*******************************************************
+ *  bind number keys to switch to Buffers 1-10
+ *******************************************************/
+function define_switch_buffer_key(key, buf_num) {
+	define_key(default_global_keymap, key,
+			   function (I) {
+			   	   switch_to_buffer(I.window, I.window.buffers.get_buffer(buf_num));
+			   });
+}
+for (let i = 0; i < 10; ++i) {
+	define_switch_buffer_key(String((i+1)%10),i);
+}
+/********************************************************/
+
+/*******************************************************
+ * switch to recent buffer (Alt-Tab like behavior)
+ *******************************************************/
+minibuffer.prototype.read_recent_buffer = function () {
+    var window = this.window;
+    var buffer = this.window.buffers.current;
+    keywords(arguments, $prompt = "Buffer:",
+             $default = buffer,
+             $history = "buffer");
+    var buffers = window.buffers.buffer_list.slice(0);
+    buffers.push(buffers.shift());
+    var completer = all_word_completer(
+        $completions = buffers,
+        $get_string = function (x) x.title,
+        $get_description = function (x) x.description);
+    var result = yield this.read(
+        $keymap = read_buffer_keymap,
+        $prompt = arguments.$prompt,
+        $history = arguments.$history,
+        $completer = completer,
+        $match_required = true,
+        $auto_complete = "buffer",
+        $auto_complete_initial = true,
+        $auto_complete_delay = 0,
+        $default_completion = arguments.$default);
+    yield co_return(result);
+};
+
+interactive("switch-to-recent-buffer",
+            "Switch to a buffer specified in the minibuffer.  List of buffers "+
+            "will be ordered by recency.",
+            function (I) {
+                switch_to_buffer(
+                    I.window,
+                    (yield I.minibuffer.read_recent_buffer(
+                         $prompt = "Switch to buffer:",
+                         $default = (I.window.buffers.count > 1 ?
+                                     I.window.buffers.buffer_list[1] :
+                                     I.buffer))));
+            });
+
+define_key(default_global_keymap, "C-x B", "switch-to-recent-buffer");
+define_key(default_global_keymap, "C-tab", "switch-to-recent-buffer");
+define_key(read_buffer_keymap, "C-tab", "minibuffer-complete");
+define_key(read_buffer_keymap, "C-S-tab", "minibuffer-complete-previous");
+
+/******************************************************************/
+
+/*****************************************************************
+ * darken current page
+ *****************************************************************/
+function darken_page (I) {
+    var styles='* { background: black !important; color: grey !important; }'+
+        ':link, :link * { color: #4986dd !important; }'+
+        ':visited, :visited * { color: #d75047 !important; }';
+    var document = I.buffer.document;
+    var newSS=document.createElement('link');
+    newSS.rel='stylesheet';
+    newSS.href='data:text/css,'+escape(styles);
+    document.getElementsByTagName("head")[0].appendChild(newSS);
+}
+
+interactive("darken-page", "Darken the page in an attempt to save your eyes.",
+            darken_page);
+
+define_key(content_buffer_normal_keymap, "C-d", "darken-page");
+
+/******************************************************************/

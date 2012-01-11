@@ -1,0 +1,25 @@
+Config { bgColor = "black"
+       , fgColor = "gray"
+       , font = "xft:Bitstream Vera Sans Mono:size=8:antialias=true"
+       , position = TopW L 90
+       , commands = [ Run Cpu ["-L", "3", "-H", "50", "--normal", "green", "--high", "red"] 10
+                    , Run Memory ["-t", "Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Date "%a %b %_d %H:%M" "date" 10
+                    , Run Network "eth0" ["-L", "0", "-H", "32", "--normal", "green", "--high", "red"] 10
+                    , Run Wireless "wlan0" ["-L", "33", "-H", "66", "--low", "red", "--high", "green"] 10
+                    , Run Battery ["-t", "<acstatus><left>%",
+                                   "-L", "10", "-H", "80",
+                                   "-l", "red", "-n", "blue", "-h", "green",
+                                   "--", 
+                                   "-O", "<fc=green>+</fc>", "-o", "<fc=red>-</fc>",
+                                   "-f", "status", 
+                                   "-c", "energy_full"
+                                  ] 10
+                    , Run Kbd [("ru(winkeys)", "RU"), ("us", "US")]
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %cpu% | %memory% * %swap% | %eth0% - %wlan0wi% | %battery% | %kbd% | <fc=#ee9a00>%date%</fc>"
+       }
