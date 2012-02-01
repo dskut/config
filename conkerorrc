@@ -25,6 +25,13 @@ define_webjump("ymail", "mail.yandex.ru");
 define_webjump("dskut", "dskut.ru");
 define_webjump("dmail", "mail.yandex.ru/for/dskut.ru");
 
+define_webjump("ywiki", "wiki.yandex-team.ru");
+define_webjump("arc", "https://arcadia.yandex.ru/wsvn/arc");
+define_webjump("clusterlearn", "http://wiki.yandex-team.ru/AlekseyShagraev/ClusterLearn");
+define_webjump("jails", "http://wiki.yandex-team.ru/JandeksNovosti/TexnicheskajaDokumentacija/Jails");
+define_webjump("jira", "jira.yandex-team.ru");
+define_webjump("paste", "paste.yandex-team.ru");
+
 webjumps.y = webjumps.yandex;
 /**************************************************/
 
