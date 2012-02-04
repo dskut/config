@@ -24,7 +24,9 @@ define_webjump("yandex", "http://yandex.ru/yandsearch?text=%s");
 define_webjump("ymail", "mail.yandex.ru");
 define_webjump("dskut", "dskut.ru");
 define_webjump("dmail", "mail.yandex.ru/for/dskut.ru");
+define_webjump("github", "github.com");
 
+// yandex-team webjumps
 define_webjump("ywiki", "wiki.yandex-team.ru");
 define_webjump("arc", "https://arcadia.yandex.ru/wsvn/arc");
 define_webjump("clusterlearn", "http://wiki.yandex-team.ru/AlekseyShagraev/ClusterLearn");

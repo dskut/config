@@ -117,6 +117,7 @@ alias git-co="git checkout"
 alias git-br="git branch"
 
 EDITOR="vim"
+BROWSER="conkeror"
 
 ulimit -c unlimited
 PS1="\[\033[0;32m\]\u@\[\033[0;36m\]\h:\[\033[0;33m\]\w\[\033[0m\]\\$ "
@@ -128,5 +129,17 @@ export DBGOUT=1
 function set_title {
     comm="\033]0;$1\a"
     echo -e $comm
+}
+
+man() {
+        env \
+        LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+        LESS_TERMCAP_md=$(printf "\e[1;31m") \
+        LESS_TERMCAP_me=$(printf "\e[0m") \
+        LESS_TERMCAP_se=$(printf "\e[0m") \
+        LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+        LESS_TERMCAP_ue=$(printf "\e[0m") \
+        LESS_TERMCAP_us=$(printf "\e[1;32m") \
+            man "$@"
 }
 
