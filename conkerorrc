@@ -23,8 +23,13 @@ define_webjump("hackernews", "http://searchyc.com/%s", $alternative = "http://ne
 define_webjump("yandex", "http://yandex.ru/yandsearch?text=%s");
 define_webjump("ymail", "mail.yandex.ru");
 define_webjump("dskut", "dskut.ru");
+define_webjump("dskut-admin", "dskut.ru/wp-admin");
 define_webjump("dmail", "mail.yandex.ru/for/dskut.ru");
 define_webjump("github", "github.com");
+define_webjump("vk", "vkontakte.ru");
+define_webjump("twi", "twitter.com");
+define_webjump("emacswiki", "emacswiki.org");
+define_webjump("arch", "wiki.archlinux.org");
 
 // yandex-team webjumps
 define_webjump("ywiki", "wiki.yandex-team.ru");

@@ -48,6 +48,8 @@ bindkey '5D' backward-word
 bindkey '^[[B' down-line-or-search
 bindkey '^[[C' forward-char
 bindkey '5C' forward-word
+bindkey '^[[C' forward-char 
+bindkey '5C' forward-word 
 bindkey '^[w' backward-delete-to-slash
 # completion in the middle of a line
 bindkey '^i' expand-or-complete-prefix
