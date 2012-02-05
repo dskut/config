@@ -11,4 +11,6 @@ xsetroot -solid black -cursor_name left_ptr
 
 xscreensaver -no-splash &
 
+mpd
+
 /usr/bin/xmonad
