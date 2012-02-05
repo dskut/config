@@ -1,0 +1,13 @@
+XTerm*foreground: white
+XTerm*background: black
+XTerm*cursorColor: gray
+
+XTerm*scrollBar: True
+XTerm*rightScrollBar: True
+XTerm*saveLines: 1000
+
+XTerm*metaSendsEscape: true
+
+XTerm*faceName: "DejaVu Sans Mono"
+XTerm*faceSize: 10
+
