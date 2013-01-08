@@ -15,6 +15,6 @@ xscreensaver -no-splash &
 
 # set background color and cursor
 xsetroot -cursor_name left_ptr
-feh --bg-center pictures/Archlinux_on_the_wall_by_Zildj4n.jpg
+feh --bg-fill pictures/Archlinux_on_the_wall_by_Zildj4n.jpg
 
 /usr/bin/xmonad
