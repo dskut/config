@@ -103,26 +103,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# my aliases
-alias arc="cd ~/projects/arcadia"
-alias ynews="cd ~/projects/arcadia/yweb/news"
-alias ync="cd ~/projects/arcadia/yweb/news/clusterd"
-alias yne="cd ~/projects/arcadia/yweb/news/eval_clusterd"
-alias abs="ssh absinthe"
-alias fwd04="ssh -N dev-nind04 -L 1982:localhost:1982"
-alias fwd05="ssh -N dev-nind05 -L 1982:localhost:1982"
-alias git-st="git status"
-alias git-ci="git commit"
-alias git-co="git checkout"
-alias git-br="git branch"
-
 EDITOR="vim"
 BROWSER="conkeror"
+PAGER="less"
 
 ulimit -c unlimited
 PS1="\[\033[0;32m\]\u@\[\033[0;36m\]\h:\[\033[0;33m\]\w\[\033[0m\]\\$ "
-
-#echo -e `curl -s -m 1 http://fucking-great-advice.ru/api/random | awk -F \" '{print $8}'` | sed 's/\&nbsp;/ /g' | sed 's/\&#151;/-/g' | cowsay -f beavis.zen
 
 export DBGOUT=1
 
