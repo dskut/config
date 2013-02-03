@@ -15,6 +15,7 @@ require("favicon");
 add_hook("mode_line_hook", mode_line_adder(buffer_icon_widget), true);
 read_buffer_show_icons = true;
 
+
 /***************************************************
  * Webjumps
  ***************************************************/
@@ -137,9 +138,7 @@ define_key(content_buffer_normal_keymap, "C-d", "darken-page");
 
 /******************************************************************/
 
-/********** blackened theme (doesn't work) ***************************************/
-/*
-theme_load_paths.push("/usr/share/conkeror/style/");
-theme_load("blackened");
-*/
+//theme_load_paths.unshift("/usr/share/conkeror/style/");
+//theme_load("gesso");
+//theme_load("blackened");
 

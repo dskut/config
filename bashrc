@@ -104,7 +104,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 EDITOR="vim"
-BROWSER="conkeror"
+BROWSER="firefox"
 PAGER="less"
 
 ulimit -c unlimited
@@ -114,8 +114,10 @@ export DBGOUT=1
 
 function set_title {
     comm="\033]0;$1\a"
-    echo -e $comm
+    echo -en $comm
 }
+
+set_title `hostname -s`
 
 ## coloured man pages
 man() {
